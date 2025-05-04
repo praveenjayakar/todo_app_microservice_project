@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = import.meta.env.VITE_AUTH_API_URL || 'http://localhost:8081/auth';
+const API_URL = (window as any).RUNTIME_CONFIG?.VITE_AUTH_API_URL;
 
 export interface AuthRequest {
     username: string;

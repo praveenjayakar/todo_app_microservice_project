@@ -7,4 +7,7 @@ interface ImportMetaEnv {
 
 interface ImportMeta {
     readonly env: ImportMetaEnv
-} 
+}
+
+const API_URL = import.meta.env.VITE_AUTH_API_URL ;
+const API_URL = import.meta.env.VITE_TASKS_API_URL; 

@@ -1,7 +1,7 @@
 import axios, { AxiosError, InternalAxiosRequestConfig, AxiosHeaders } from 'axios';
 import { getToken } from './authService';
 
-const API_URL = import.meta.env.VITE_TASKS_API_URL || 'http://localhost:8083/tasks';
+const API_URL = (window as any).RUNTIME_CONFIG?.VITE_TASKS_API_URL;
 
 export interface Task {
     id?: number;

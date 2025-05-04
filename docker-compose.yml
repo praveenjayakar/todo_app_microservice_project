@@ -5,9 +5,9 @@ services:
       dockerfile: Dockerfile
     ports:
       - "80:80"
-    environment:
-      - VITE_AUTH_API_URL=http://auth-service:8081/auth
-      - VITE_TASKS_API_URL=http://task-service:8083/tasks
+    volumes:
+      - ./config.js:/usr/share/nginx/html/config.js
+    restart: unless-stopped
     depends_on:
       - auth-service
       - task-service
