@@ -1,4 +1,4 @@
-import axios, { AxiosRequestConfig, AxiosError } from 'axios';
+import axios, { AxiosError, InternalAxiosRequestConfig, AxiosHeaders } from 'axios';
 import { getToken } from './authService';
 
 const API_URL = import.meta.env.VITE_TASKS_API_URL || 'http://localhost:8083/tasks';
@@ -21,13 +21,13 @@ const axiosInstance = axios.create({
 });
 
 axiosInstance.interceptors.request.use(
-    (config: AxiosRequestConfig) => {
+    (config: InternalAxiosRequestConfig) => {
         const token = getToken();
         if (token) {
-            config.headers = {
-                ...config.headers,
-                Authorization: `Bearer ${token}`
-            };
+            if (!config.headers) {
+                config.headers = new AxiosHeaders();
+            }
+            config.headers.set('Authorization', `Bearer ${token}`);
         }
         return config;
     },
