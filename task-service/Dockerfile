@@ -4,8 +4,7 @@ COPY pom.xml .
 COPY src ./src
 RUN mvn clean package -DskipTests
 
-FROM openjdk:17-slim
-WORKDIR /app
-COPY --from=build /app/target/*.jar app.jar
+FROM gcr.io/distroless/java17-debian12
+COPY --from=build /app/target/*.jar main.jar
 EXPOSE 8083
-ENTRYPOINT ["java", "-jar", "app.jar"] 
+CMD ["main.jar"] 
